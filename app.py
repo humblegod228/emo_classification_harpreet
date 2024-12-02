@@ -85,9 +85,14 @@ def main():
         if st.button("Type Text"):
             option = "Type Text"
     with col2:
+        # Record Voice button triggers redirection
         if st.button("Record Voice"):
-            # Redirect to the specified URL
-            st.markdown("(https://rvinasemotionclassificationproject-97gqchtigjbnh4pzzdnme4.streamlit.app/)", unsafe_allow_html=True)
+            # Redirect the page to the provided URL
+            st.experimental_set_query_params()
+            st.markdown(
+                f'<script>window.location = "https://rvinasemotionclassificationproject-97gqchtigjbnh4pzzdnme4.streamlit.app/"</script>',
+                unsafe_allow_html=True
+            )
 
     if option == "Type Text":
         with st.form(key='my_form'):
