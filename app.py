@@ -69,7 +69,13 @@ def process_text(raw_text):
         fig = alt.Chart(proba_df_clean).mark_bar().encode(x='emotions', y='probability', color='emotions')
         st.altair_chart(fig, use_container_width=True)
 
+def load_css():
+    with open("style.css") as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
 def main():
+    load_css()
+  
     st.title("SceneSonic")
     st.subheader("A cutting-edge AI platform designed to revolutionize how emotions are understood in theater!")
 
