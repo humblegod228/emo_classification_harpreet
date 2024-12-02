@@ -79,7 +79,6 @@ def main():
     st.title("SceneSonic")
     st.subheader("A cutting-edge AI platform designed to revolutionize how emotions are understood in theater!")
 
-    # Replace selectbox with clickable buttons
     option = None
     col1, col2 = st.columns(2)
     with col1:
@@ -87,7 +86,8 @@ def main():
             option = "Type Text"
     with col2:
         if st.button("Record Voice"):
-            option = "Record Voice"
+            # Redirect to the specified URL
+            st.markdown("[Click here to record voice](https://rvinasemotionclassificationproject-97gqchtigjbnh4pzzdnme4.streamlit.app/)", unsafe_allow_html=True)
 
     if option == "Type Text":
         with st.form(key='my_form'):
@@ -96,22 +96,5 @@ def main():
 
         if submit_text:
             process_text(raw_text)
-
-    elif option == "Record Voice":
-        webrtc_ctx = webrtc_streamer(
-            key="speech-to-text",
-            mode=WebRtcMode.SENDRECV,
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-            media_stream_constraints={"audio": True, "video": False},
-            audio_processor_factory=AudioProcessor,
-        )
-
-        if webrtc_ctx.state.playing and webrtc_ctx.audio_processor:
-            if st.button("Stop"):
-                raw_text = webrtc_ctx.audio_processor.text
-                if raw_text and raw_text != "Could not understand audio":
-                    st.write("Transcribed Text: ", raw_text)
-                    process_text(raw_text)
-
 if __name__ == '__main__':
     main()
