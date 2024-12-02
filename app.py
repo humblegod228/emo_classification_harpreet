@@ -70,8 +70,8 @@ def process_text(raw_text):
         st.altair_chart(fig, use_container_width=True)
 
 def main():
-    st.markdown('<h1 class="title">SceneSonic</h1>', unsafe_allow_html=True)
-    st.markdown('<h2 class="subheader">A cutting-edge AI platform designed to revolutionize how emotions are understood in theater!</h2>', unsafe_allow_html=True)
+    st.title("SceneSonic")
+    st.subheader("A cutting-edge AI platform designed to revolutionize how emotions are understood in theater!")
 
     option = st.selectbox("Choose Input Method", ("Record Voice", "Type Text"))
 
