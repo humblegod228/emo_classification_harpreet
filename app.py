@@ -87,10 +87,13 @@ def main():
     with col2:
         # Record Voice button triggers redirection
         if st.button("Record Voice"):
-            # Redirect the page to the provided URL
-            st.experimental_set_query_params()
+            # JavaScript redirection
             st.markdown(
-                f'<script>window.location = "https://rvinasemotionclassificationproject-97gqchtigjbnh4pzzdnme4.streamlit.app/"</script>',
+                """
+                <script type="text/javascript">
+                    window.location.href = "https://rvinasemotionclassificationproject-97gqchtigjbnh4pzzdnme4.streamlit.app/";
+                </script>
+                """,
                 unsafe_allow_html=True
             )
 
