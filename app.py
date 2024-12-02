@@ -75,27 +75,11 @@ def load_css():
 
 def main():
     load_css()
-
+  
     st.title("SceneSonic")
     st.subheader("A cutting-edge AI platform designed to revolutionize how emotions are understood in theater!")
 
-    option = None
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("Type Text"):
-            option = "Type Text"
-    with col2:
-        # Record Voice button triggers redirection
-        if st.button("Record Voice"):
-            # JavaScript redirection
-            st.markdown(
-                """
-                <script type="text/javascript">
-                    window.location.href = "https://rvinasemotionclassificationproject-97gqchtigjbnh4pzzdnme4.streamlit.app/";
-                </script>
-                """,
-                unsafe_allow_html=True
-            )
+    option = st.selectbox("Choose Input Method", ("Record Voice", "Type Text"))
 
     if option == "Type Text":
         with st.form(key='my_form'):
@@ -104,5 +88,22 @@ def main():
 
         if submit_text:
             process_text(raw_text)
+
+    elif option == "Record Voice":
+        webrtc_ctx = webrtc_streamer(
+            key="speech-to-text",
+            mode=WebRtcMode.SENDRECV,
+            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+            media_stream_constraints={"audio": True, "video": False},
+            audio_processor_factory=AudioProcessor,
+        )
+
+        if webrtc_ctx.state.playing and webrtc_ctx.audio_processor:
+            if st.button("Stop"):
+                raw_text = webrtc_ctx.audio_processor.text
+                if raw_text and raw_text != "Could not understand audio":
+                    st.write("Transcribed Text: ", raw_text)
+                    process_text(raw_text)
+
 if __name__ == '__main__':
     main()
