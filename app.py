@@ -87,7 +87,7 @@ def main():
     with col2:
         if st.button("Record Voice"):
             # Redirect to the specified URL
-            st.markdown("[Click here to record voice](https://rvinasemotionclassificationproject-97gqchtigjbnh4pzzdnme4.streamlit.app/)", unsafe_allow_html=True)
+            st.markdown("(https://rvinasemotionclassificationproject-97gqchtigjbnh4pzzdnme4.streamlit.app/)", unsafe_allow_html=True)
 
     if option == "Type Text":
         with st.form(key='my_form'):
