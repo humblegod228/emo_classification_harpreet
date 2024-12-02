@@ -70,8 +70,8 @@ def process_text(raw_text):
         st.altair_chart(fig, use_container_width=True)
 
 def main():
-    st.title("Text Emotion Detection")
-    st.subheader("Detect Emotions In Text or Voice")
+    st.title("SceneSonic")
+    st.subheader("A cutting-edge AI platform designed to revolutionize how emotions are understood in theater!")
 
     # Set "Record Voice" as the default option
     option = st.selectbox("Choose Input Method", ("Record Voice", "Type Text"))
